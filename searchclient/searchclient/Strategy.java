@@ -3,6 +3,8 @@ package searchclient;
 import java.util.ArrayDeque;
 import java.util.HashSet;
 
+//import javafx.scene.Node;
+import searchclient.Node;
 import searchclient.Memory;
 import searchclient.NotImplementedException;
 
@@ -49,13 +51,15 @@ public abstract class Strategy {
 	public abstract String toString();
 
 	public static class StrategyBFS extends Strategy {
+		/* Inherits from Strategy */
+		
 		private ArrayDeque<Node> frontier;
 		private HashSet<Node> frontierSet;
 
 		public StrategyBFS() {
 			super();
-			frontier = new ArrayDeque<Node>();
-			frontierSet = new HashSet<Node>();
+			frontier = new ArrayDeque<Node>(); // removes from Deque
+			frontierSet = new HashSet<Node>(); // remove from the Frontier
 		}
 
 		@Override
@@ -93,34 +97,43 @@ public abstract class Strategy {
 	}
 
 	public static class StrategyDFS extends Strategy {
+		// Inherits stuff from Stategy
+		
+		private ArrayDeque<Node> frontier;
+		private HashSet<Node> frontierSet;
+		
 		public StrategyDFS() {
 			super();
-			throw new NotImplementedException();
+			frontier = new ArrayDeque<Node>();
+			frontierSet = new HashSet<Node>();
 		}
 
 		@Override
 		public Node getAndRemoveLeaf() {
-			throw new NotImplementedException();
+			Node n = frontier.pollFirst();
+			frontierSet.remove(n);
+			return n;
 		}
 
 		@Override
 		public void addToFrontier(Node n) {
-			throw new NotImplementedException();
+			frontier.addFirst(n);
+			frontierSet.add(n);
 		}
 
 		@Override
 		public int countFrontier() {
-			throw new NotImplementedException();
+			return frontier.size();
 		}
 
 		@Override
 		public boolean frontierIsEmpty() {
-			throw new NotImplementedException();
+			return frontier.isEmpty();
 		}
 
 		@Override
 		public boolean inFrontier(Node n) {
-			throw new NotImplementedException();
+			return frontierSet.contains(n);
 		}
 
 		@Override

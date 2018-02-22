@@ -3,8 +3,6 @@ package searchclient;
 import java.util.ArrayDeque;
 import java.util.HashSet;
 
-//import javafx.scene.Node;
-import searchclient.Node;
 import searchclient.Memory;
 import searchclient.NotImplementedException;
 
@@ -51,15 +49,13 @@ public abstract class Strategy {
 	public abstract String toString();
 
 	public static class StrategyBFS extends Strategy {
-		/* Inherits from Strategy */
-		
 		private ArrayDeque<Node> frontier;
 		private HashSet<Node> frontierSet;
 
 		public StrategyBFS() {
 			super();
-			frontier = new ArrayDeque<Node>(); // removes from Deque
-			frontierSet = new HashSet<Node>(); // remove from the Frontier
+			frontier = new ArrayDeque<Node>();
+			frontierSet = new HashSet<Node>();
 		}
 
 		@Override
@@ -97,11 +93,9 @@ public abstract class Strategy {
 	}
 
 	public static class StrategyDFS extends Strategy {
-		// Inherits stuff from Stategy
-		
 		private ArrayDeque<Node> frontier;
 		private HashSet<Node> frontierSet;
-		
+
 		public StrategyDFS() {
 			super();
 			frontier = new ArrayDeque<Node>();
@@ -133,7 +127,7 @@ public abstract class Strategy {
 
 		@Override
 		public boolean inFrontier(Node n) {
-			return frontierSet.contains(n);
+			return frontier.contains(n);
 		}
 
 		@Override
